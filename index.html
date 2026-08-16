@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHACCOP - Chambre de Commerce et de l'Industrie RDC-Portugal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        chaccopBlue: '#0052B4',
+                        chaccopRed: '#D92D20',
+                        chaccopYellow: '#FFC72C',
+                        chaccopGreen: '#009739',
+                        chaccopDark: '#1E293B',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-chaccopBlue selection:text-white">
+
+    <!-- HEADER -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100 pt-4 pb-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center space-x-3">
+                <img src="chaccop_logo.png" alt="CHACCOP Logo" class="h-16 w-auto object-contain rounded">
+            </a>
+
+            <!-- Navigation Desktop -->
+            <nav class="hidden md:flex items-center space-x-6 text-sm font-semibold text-slate-700">
+                <a href="#hero" data-i18n="nav_home" class="hover:text-chaccopBlue transition-colors">Accueil</a>
+                <a href="about.html" data-i18n="nav_about" class="hover:text-chaccopBlue transition-colors">Qui sommes-nous</a>
+                <a href="#objectifs" data-i18n="nav_objectives" class="hover:text-chaccopBlue transition-colors">Objectifs</a>
+                <a href="#activites" data-i18n="nav_activities" class="hover:text-chaccopBlue transition-colors">Nos Activités</a>
+                <a href="#services" data-i18n="nav_services" class="hover:text-chaccopBlue transition-colors">Nos Services</a>
+                <a href="#partenaires" data-i18n="nav_partners" class="hover:text-chaccopBlue transition-colors">Partenaires</a>
+            </nav>
+
+            <!-- Menu Langue + Call To Action -->
+            <div class="flex items-center space-x-4">
+                
+                <!-- DROPDOWN LANGUE (DESKTOP) -->
+                <div class="relative hidden sm:block">
+                    <button id="lang-btn-desktop" class="flex items-center space-x-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-lg border border-slate-200 transition-colors">
+                        <i class="fa-solid fa-globe text-slate-500"></i>
+                        <span id="current-lang-desktop">Français</span>
+                        <i class="fa-solid fa-chevron-down text-[10px] text-slate-400"></i>
+                    </button>
+
+                    <!-- Menu Déroulant Desktop -->
+                    <div id="lang-dropdown-desktop" class="hidden absolute right-0 mt-2 w-36 bg-white border border-slate-200 rounded-xl shadow-xl py-1 z-50">
+                        <button onclick="changeLanguage('Français', 'fr')" class="w-full text-left px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-chaccopBlue flex items-center justify-between">
+                            <span>Français</span>
+                            <span class="text-[10px] text-slate-400">FR</span>
+                        </button>
+                        <button onclick="changeLanguage('English', 'en')" class="w-full text-left px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-chaccopBlue flex items-center justify-between">
+                            <span>English</span>
+                            <span class="text-[10px] text-slate-400">EN</span>
+                        </button>
+                        <button onclick="changeLanguage('Português', 'pt')" class="w-full text-left px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-chaccopBlue flex items-center justify-between">
+                            <span>Português</span>
+                            <span class="text-[10px] text-slate-400">PT</span>
+                        </button>
+                    </div>
+                </div>
+
+                <a href="contact.html" data-i18n="nav_contact" class="px-4 py-2 text-xs sm:text-sm font-bold text-white bg-chaccopBlue hover:bg-blue-700 rounded-lg shadow-sm transition-colors">
+                    Contact us
+                </a>
+
+                <!-- Bouton Hamburger Mobile -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-slate-700 rounded-lg hover:bg-slate-100 focus:outline-none">
+                    <i id="menu-icon" class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Menu Déroulant Mobile -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-2 shadow-lg">
+            <a href="index.html" data-i18n="nav_home" class="mobile-link block px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-lg">Accueil</a>
+            <a href="about.html" data-i18n="nav_about" class="mobile-link block px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-lg">Qui sommes-nous</a>
+            <a href="objectives.html" data-i18n="nav_objectives" class="mobile-link block px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-lg" data-i18n="nav_objectives">Objectifs</a>
+            <a href="activities.html" data-i18n="nav_activities" class="mobile-link block px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50" data-i18n="nav_activities">Nos Activités</a>
+            <a href="services.html" data-i18n="nav_services" class="mobile-link block px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-lg" data-i18n="nav_services">Nos Services</a>
+            <a href="partners.html" data-i18n="nav_partners" class="mobile-link block px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-lg" data-i18n="nav_partners">Partenaires</a>
+
+            <!-- Sélecteur de Langue Mobile -->
+            <div class="pt-3 border-t border-slate-100 px-4">
+                <span data-i18n="lang_title" class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-2">Langue / Language</span>
+                <div class="grid grid-cols-3 gap-2">
+                    <button onclick="changeLanguage('Français', 'fr')" class="py-2 text-center text-xs font-bold bg-slate-100 hover:bg-blue-50 hover:text-chaccopBlue rounded-lg border border-slate-200">
+                        FR
+                    </button>
+                    <button onclick="changeLanguage('English', 'en')" class="py-2 text-center text-xs font-bold bg-slate-100 hover:bg-blue-50 hover:text-chaccopBlue rounded-lg border border-slate-200">
+                        EN
+                    </button>
+                    <button onclick="changeLanguage('Português', 'pt')" class="py-2 text-center text-xs font-bold bg-slate-100 hover:bg-blue-50 hover:text-chaccopBlue rounded-lg border border-slate-200">
+                        PT
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="bg-[linear-gradient(to_bottom,rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url('./hero_background.png')] bg-cover bg-no-repeat bg-center relative bg-slate-900 text-white overflow-hidden py-20 lg:py-28">
+        <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#0052B4_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="absolute -top-24 -right-24 w-96 h-96 bg-chaccopRed/20 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-chaccopBlue/30 rounded-full blur-3xl"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Texte Principal -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 bg-white/10 backdrop-blur-md rounded-full border border-white/15 text-xs font-semibold text-amber-300">
+                        <i class="fa-solid fa-handshake"></i>
+                        <span data-i18n="hero_badge">Partenariat Économique Bilatéral</span>
+                    </div>
+                    
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight" data-i18n="hero_title">
+                        Chambre de Commerce et de l'Industrie <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-amber-300 to-red-400">RDC–Portugal</span>
+                    </h1>
+                    
+                    <p class="text-lg text-slate-300 leading-relaxed" data-i18n="hero_desc">
+                    La Chambre de Commerce et d'Industrie RDC–Portugal (CHACCOP) accélère vos opportunités d'affaires, vos partenariats stratégiques et vos investissements bi-nationaux.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <a href="contact.html" class="px-6 py-3.5 bg-chaccopRed hover:bg-red-600 text-white font-bold rounded-xl shadow-lg transition-all flex items-center space-x-2">
+                            <span data-i18n="nav_contact">Contact us</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                        <a href="about.html" data-i18n="hero_learn_more" class="px-6 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl backdrop-blur-md border border-white/20 transition-all">
+                            En savoir plus
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Widget Horaires -->
+                <div class="lg:col-span-5">
+                    <div class="bg-slate-900/80 backdrop-blur-md border border-slate-700/80 rounded-2xl p-6 shadow-2xl relative">
+                        <div class="absolute -top-3 right-6 px-3 py-1 bg-chaccopYellow text-slate-900 text-xs font-black rounded-full uppercase tracking-wider" data-i18n="hero_hours_badge">
+                            Horaires des Services
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-4 flex items-center">
+                            <i class="fa-regular fa-clock text-chaccopYellow mr-2.5"></i> <span data-i18n="hero_hours_title">Permanence CHACCOP</span>
+                        </h3>
+                        <div class="space-y-4 text-sm">
+                            <div class="p-3.5 rounded-xl bg-slate-800/60 border border-slate-700/50">
+                                <div class="font-bold text-blue-400 flex justify-between">
+                                    <span>Portugal (Lisbonne)</span>
+                                    <span class="text-xs text-slate-400">GMT+1</span>
+                                </div>
+                                <div class="text-slate-300 font-medium mt-1" data-i18n="hero_hours_pt">Dimanche au Jeudi &bull; <span class="text-amber-300 font-semibold">8h00 à 15h00</span></div>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-slate-800/60 border border-slate-700/50">
+                                <div class="font-bold text-red-400 flex justify-between">
+                                    <span>RDC (Kinshasa)</span>
+                                    <span class="text-xs text-slate-400">GMT+1</span>
+                                </div>
+                                <div class="text-slate-300 font-medium mt-1" data-i18n="hero_hours_rdc">Lundi au Vendredi &bull; <span class="text-amber-300 font-semibold">8h30 à 16h00</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION WHO WE ARE -->
+    <section id="about" class="py-20 bg-white border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-black tracking-widest text-chaccopBlue uppercase mb-2" data-i18n="about_tag">À Propos</h2>
+                <p class="text-3xl font-extrabold text-slate-900 sm:text-4xl" data-i18n="nav_about">Qui sommes-nous ?</p>
+                <div class="w-16 h-1 bg-chaccopBlue mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <div class="p-6 bg-blue-50/60 rounded-2xl border-l-4 border-chaccopBlue">
+                        <h3 class="text-xl font-bold text-chaccopBlue mb-2" data-i18n="about_title1">Chambre de commerce</h3>
+                        <p class="text-slate-700 leading-relaxed text-sm" data-i18n="about_desc1">
+                            La CHACCOP (Chambre de Commerce et de l’Industrie RDC–Portugal) est une initiative stratégique visant à consolider les relations économiques et commerciales entre la République Démocratique du Congo et le Portugal.
+                        </p>
+                    </div>
+
+                    <div class="p-6 bg-red-50/60 rounded-2xl border-l-4 border-chaccopRed">
+                        <h3 class="text-xl font-bold text-chaccopRed mb-2" data-i18n="about_title2">Notre vision</h3>
+                        <p class="text-slate-700 leading-relaxed text-sm" data-i18n="about_desc2">
+                            Stimuler l'augmentation durable du volume des échanges commerciaux, promouvoir l'amélioration du climat des affaires et favoriser la création de nouvelles opportunités d'emploi et de partenariats stratégiques entre les deux nations.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Support Diplomatique Card -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-8 space-y-6">
+                    <h3 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-3 flex items-center">
+                        <i class="fa-solid fa-building-columns text-chaccopBlue mr-3"></i> <span data-i18n="about_support_title">Support Diplomatique & Institutionnel</span>
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-bold text-sm text-chaccopBlue flex items-center">
+                                <i class="fa-solid fa-flag mr-2"></i> <span data-i18n="about_embassy_rdc">Ambassade de la RDC au Portugal</span>
+                            </h4>
+                            <ul class="mt-2 space-y-1.5 text-xs text-slate-600 pl-6 list-disc">
+                                <li data-i18n="about_emb_rdc_1">Faciliter les contacts avec les institutions économiques portugaises.</li>
+                                <li data-i18n="about_emb_rdc_2">Identifier les opportunités d’investissement pour les entreprises congolaises.</li>
+                                <li data-i18n="about_emb_rdc_3">Appuyer l’organisation des missions économiques et des forums.</li>
+                            </ul>
+                        </div>
+
+                        <div class="pt-3 border-t border-slate-200">
+                            <h4 class="font-bold text-sm text-chaccopRed flex items-center">
+                                <i class="fa-solid fa-flag mr-2"></i> <span data-i18n="about_embassy_pt">Ambassade du Portugal en RDC</span>
+                            </h4>
+                            <ul class="mt-2 space-y-1.5 text-xs text-slate-600 pl-6 list-disc">
+                                <li data-i18n="about_emb_pt_1">Accompagner les entreprises portugaises dans leur implantation en RDC.</li>
+                                <li data-i18n="about_emb_pt_2">Promouvoir les secteurs porteurs de la RDC auprès des investisseurs portugais.</li>
+                                <li data-i18n="about_emb_pt_3">Soutenir les initiatives de coopération économique et commerciale.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="about.html" class="px-6 py-3.5 bg-chaccopRed hover:bg-red-600 text-white font-bold rounded-xl shadow-lg transition-all flex items-center space-x-2 mt-12 mx-auto w-max">
+        <span data-i18n="hero_learn_more">En savoir plus</span>
+        <i class="fa-solid fa-arrow-right text-xs"></i>
+        </a>
+    </section>
+
+    <!-- SECTION OBJECTIFS -->
+    <section id="objectifs" class="py-20 bg-slate-50 border-b border-slate-200/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-black tracking-widest text-chaccopRed uppercase mb-2" data-i18n="obj_tag">Axes Majeurs</h2>
+                <p class="text-3xl font-extrabold text-slate-900 sm:text-4xl" data-i18n="nav_objectives">Nos Objectifs Stratégiques</p>
+                <div class="w-16 h-1 bg-chaccopRed mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-blue-100 text-chaccopBlue rounded-xl flex items-center justify-center text-xl font-bold mb-4">
+                        <i class="fa-solid fa-comments"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 mb-2" data-i18n="obj_1_title">Dialogue Permanent</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed" data-i18n="obj_1_desc">Créer une plateforme permanente de dialogue et de collaboration entre les opérateurs économiques congolais et portugais.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-red-100 text-chaccopRed rounded-xl flex items-center justify-center text-xl font-bold mb-4">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 mb-2" data-i18n="obj_2_title">Promotion des IDE</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed" data-i18n="obj_2_desc">Promouvoir les investissements directs étrangers (IDE) dans les secteurs prioritaires de la RDC.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-amber-100 text-amber-700 rounded-xl flex items-center justify-center text-xl font-bold mb-4">
+                        <i class="fa-solid fa-arrows-rotate"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 mb-2" data-i18n="obj_3_title">Échanges Bilatéraux</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed" data-i18n="obj_3_desc">Faciliter activement les échanges commerciaux, technologiques et culturels entre les deux pays.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-xl flex items-center justify-center text-xl font-bold mb-4">
+                        <i class="fa-solid fa-eye"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 mb-2" data-i18n="obj_4_title">Visibilité Accrue</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed" data-i18n="obj_4_desc">Renforcer la visibilité et l'impact des entreprises des deux pays sur leurs marchés respectifs.</p>
+                </div>
+            </div>
+        </div>
+        <a href="objectives.html" class="px-6 py-3.5 bg-chaccopRed hover:bg-red-600 text-white font-bold rounded-xl shadow-lg transition-all flex items-center space-x-2 mt-12 mx-auto w-max">
+            <span data-i18n="obj_cta">En savoir plus</span>
+            <i class="fa-solid fa-arrow-right text-xs"></i>
+        </a>
+    </section>
+
+    <!-- SECTION NOS ACTIVITES -->
+    <section id="activites" class="py-20 bg-white border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-black tracking-widest text-chaccopBlue uppercase mb-2" data-i18n="act_tag">Programme</h2>
+                <p class="text-3xl font-extrabold text-slate-900 sm:text-4xl" data-i18n="nav_activities">Nos Activités Prévisionnelles</p>
+                <div class="w-16 h-1 bg-chaccopBlue mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Carte 1 -->
+                <div class="p-8 border-2 border-chaccopBlue rounded-2xl bg-white shadow-sm hover:shadow-md transition-all">
+                    <div class="text-chaccopBlue font-bold text-sm uppercase tracking-wider mb-2" data-i18n="act_card1_tag">Événements</div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-3" data-i18n="act_card1_title">Forums & Lancement</h3>
+                    <p class="text-slate-600 text-xs leading-relaxed" data-i18n="act_card1_desc">
+                        Lancement officiel sous le haut patronage des deux Ambassades et organisation de forums économiques annuels alternés entre Kinshasa et Lisbonne.
+                    </p>
+                </div>
+
+                <!-- Carte 2 -->
+                <div class="p-8 border-2 border-chaccopBlue rounded-2xl bg-white shadow-sm hover:shadow-md transition-all">
+                    <div class="text-chaccopBlue font-bold text-sm uppercase tracking-wider mb-2" data-i18n="act_card2_tag">Orientation</div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-3" data-i18n="act_card2_title">Guichet Unique</h3>
+                    <p class="text-slate-600 text-xs leading-relaxed" data-i18n="act_card2_desc">
+                        Création d’un guichet unique d’information complet dédié aux investisseurs et mise en place du répertoire officiel des entreprises membres.
+                    </p>
+                </div>
+
+                <!-- Carte 3 -->
+                <div class="p-8 border-2 border-chaccopBlue rounded-2xl bg-white shadow-sm hover:shadow-md transition-all">
+                    <div class="text-chaccopBlue font-bold text-sm uppercase tracking-wider mb-2" data-i18n="act_card3_tag">Analyse</div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-3" data-i18n="act_card3_title">Bulletins Économiques</h3>
+                    <p class="text-slate-600 text-xs leading-relaxed" data-i18n="act_card3_desc">
+                        Publication régulière de bulletins économiques et d'analyses sectorielles pour offrir des perspectives d'affaires fiables aux investisseurs.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <a href="activities.html" class="px-6 py-3.5 bg-chaccopRed hover:bg-red-600 text-white font-bold rounded-xl shadow-lg transition-all flex items-center space-x-2 mt-12 mx-auto w-max">
+        <span data-i18n="hero_learn_more">En savoir plus</span>
+        <i class="fa-solid fa-arrow-right text-xs"></i>
+        </a>
+    </section>
+
+    <!-- SECTION NOS SERVICES -->
+    <section id="services" class="py-20 bg-slate-50 border-b border-slate-200/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-black tracking-widest text-chaccopRed uppercase mb-2" data-i18n="srv_tag">Accompagnement</h2>
+                <p class="text-3xl font-extrabold text-slate-900 sm:text-4xl" data-i18n="nav_services">Nos Services</p>
+                <div class="w-16 h-1 bg-chaccopRed mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Carte 1 -->
+                <div class="p-8 border-2 border-chaccopRed rounded-2xl bg-white shadow-sm hover:shadow-md transition-all">
+                    <div class="text-chaccopRed font-bold text-sm uppercase tracking-wider mb-2" data-i18n="srv_card1_tag">Implantation</div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-3" data-i18n="srv_card1_title">Support Stratégique</h3>
+                    <p class="text-slate-600 text-xs leading-relaxed" data-i18n="srv_card1_desc">
+                        Accompagnement personnalisé pour l'implantation d'entreprises portugaises en RDC et de sociétés congolaises au Portugal.
+                    </p>
+                </div>
+
+                <!-- Carte 2 -->
+                <div class="p-8 border-2 border-chaccopRed rounded-2xl bg-white shadow-sm hover:shadow-md transition-all">
+                    <div class="text-chaccopRed font-bold text-sm uppercase tracking-wider mb-2" data-i18n="srv_card2_tag">Réseautage</div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-3" data-i18n="srv_card2_title">Mise en Relation B2B</h3>
+                    <p class="text-slate-600 text-xs leading-relaxed" data-i18n="srv_card2_desc">
+                        Organisation de missions économiques sur-mesure et facilitation de rencontres B2B directes avec les décideurs locaux.
+                    </p>
+                </div>
+
+                <!-- Carte 3 -->
+                <div class="p-8 border-2 border-chaccopRed rounded-2xl bg-white shadow-sm hover:shadow-md transition-all">
+                    <div class="text-chaccopRed font-bold text-sm uppercase tracking-wider mb-2" data-i18n="srv_card3_tag">Conseil</div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-3" data-i18n="srv_card3_title">Partenariats Public-Privé</h3>
+                    <p class="text-slate-600 text-xs leading-relaxed" data-i18n="srv_card3_desc">
+                        Assistance juridique, réglementaire et commerciale en étroite synergie avec les agences officielles de promotion des investissements.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <a href="services.html" class="px-6 py-3.5 bg-chaccopRed hover:bg-red-600 text-white font-bold rounded-xl shadow-lg transition-all flex items-center space-x-2 mt-12 mx-auto w-max">
+        <span data-i18n="hero_learn_more">En savoir plus</span>
+        <i class="fa-solid fa-arrow-right text-xs"></i>
+        </a>
+    </section>
+
+    <!-- SECTION PARTENAIRES -->
+    <section id="partenaires" class="py-16 bg-slate-50 border-b border-slate-200/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-xs font-black tracking-widest text-slate-400 uppercase mb-8" data-i18n="part_tag">Partenaires</h2>
+            
+            <div class="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
+                <span class="px-4 py-2 bg-white rounded-lg border border-slate-200 text-xs font-semibold text-slate-700 shadow-sm" data-i18n="part_min_com">Ministère du Commerce Extérieur (RDC)</span>
+                <span class="px-4 py-2 bg-white rounded-lg border border-slate-200 text-xs font-semibold text-slate-700 shadow-sm" data-i18n="part_min_affaires">Ministère des Affaires Étrangères (Portugal)</span>
+                <span class="px-4 py-2 bg-white rounded-lg border border-slate-200 text-xs font-semibold text-slate-700 shadow-sm">AICEP Portugal Global</span>
+                <span class="px-4 py-2 bg-white rounded-lg border border-slate-200 text-xs font-semibold text-slate-700 shadow-sm" data-i18n="part_fec">FEC (Fédération des Entreprises du Congo)</span>
+                <span class="px-4 py-2 bg-white rounded-lg border border-slate-200 text-xs font-semibold text-slate-700 shadow-sm">ANAPI</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION CONTACT -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-black tracking-widest text-chaccopBlue uppercase mb-2" data-i18n="contact_tag">Localisation & Info</h2>
+                <p class="text-3xl font-extrabold text-slate-900 sm:text-4xl" data-i18n="nav_contact">Contactez-nous</p>
+                <div class="w-16 h-1 bg-chaccopBlue mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="max-w-3xl mx-auto space-y-6">
+                <!-- Kinshasa -->
+                <div class="p-6 border-2 border-chaccopBlue rounded-2xl bg-white shadow-sm flex items-start space-x-4">
+                    <div class="p-3 bg-blue-50 text-chaccopBlue rounded-xl">
+                        <i class="fa-solid fa-location-dot text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-bold text-slate-900" data-i18n="contact_kin_title">Adresse à Kinshasa</h3>
+                        <p class="text-xs text-slate-600 mt-1" data-i18n="contact_kin_sub">CHACCOP – Représentation RDC</p>
+                        <p class="text-xs text-slate-400 mt-0.5 italic" data-i18n="contact_kin_desc">Kinshasa, République Démocratique du Congo (En synergie avec la FEC & ANAPI)</p>
+                    </div>
+                </div>
+
+                <!-- Lisbonne -->
+                <div class="p-6 border-2 border-chaccopRed rounded-2xl bg-white shadow-sm flex items-start space-x-4">
+                    <div class="p-3 bg-red-50 text-chaccopRed rounded-xl">
+                        <i class="fa-solid fa-location-dot text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-bold text-slate-900" data-i18n="contact_lis_title">Adresse à Lisbonne</h3>
+                        <p class="text-xs text-slate-600 mt-1" data-i18n="contact_lis_sub">CHACCOP – Représentation Portugal</p>
+                        <p class="text-xs text-slate-400 mt-0.5 italic" data-i18n="contact_lis_desc">Lisbonne, Portugal (En synergie avec AICEP Portugal Global)</p>
+                    </div>
+                </div>
+
+                <!-- Info contact -->
+                <div class="p-6 border border-slate-200 rounded-2xl bg-slate-50 flex items-start space-x-4">
+                    <div class="p-3 bg-amber-100 text-amber-600 rounded-xl">
+                        <i class="fa-solid fa-envelope text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-bold text-slate-900" data-i18n="contact_info_title">Informations de contact</h3>
+                        <p class="text-xs text-slate-600 mt-1"><span data-i18n="contact_email_label">Email :</span> contact@chaccop.org • <span data-i18n="contact_sec">Secrétariat Général</span></p>
+                        <p class="text-xs text-slate-400 mt-0.5 italic" data-i18n="contact_form_note">Formulaire et numéros officiels à compléter lors du lancement officiel.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact" class="bg-slate-900 text-white border-t border-slate-800 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Col 1 : À Propos -->
+                <div class="space-y-4">
+                    <img src="chaccop_logo.png" alt="CHACCOP Logo" class="h-14 w-auto object-contain bg-white/10 p-2 rounded-lg">
+                    <p class="text-slate-400 text-xs leading-relaxed" data-i18n="footer.desc">
+                        Chambre de Commerce et d'Industrie RDC-Portugal (ASBL). L'organe de référence pour dynamiser les échanges économiques, industriels et commerciaux bilatéraux.
+                    </p>
+                    <div class="flex space-x-3 text-slate-400">
+                        <a href="#" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-chaccopBlue hover:text-white flex items-center justify-center transition-colors"><i class="fa-brands fa-linkedin-in text-sm"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-chaccopBlue hover:text-white flex items-center justify-center transition-colors"><i class="fa-brands fa-facebook-f text-sm"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-chaccopBlue hover:text-white flex items-center justify-center transition-colors"><i class="fa-brands fa-twitter text-sm"></i></a>
+                    </div>
+                </div>
+
+                <!-- Col 2 : Navigation Rapide -->
+                <div class="space-y-3">
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-amber-400" data-i18n="footer.links_title">Navigation</h3>
+                    <ul class="space-y-2 text-xs font-medium text-slate-300">
+                        <li><a href="index.html" data-i18n="nav.home" class="hover:text-amber-400 transition-colors">Accueil</a></li>
+                        <li><a href="about.html" data-i18n="nav.about" class="hover:text-amber-400 transition-colors">Qui sommes-nous</a></li>
+                        <li><a href="objectives.html" data-i18n="nav.objectives" class="hover:text-amber-400 transition-colors">Objectifs Stratégiques</a></li>
+                        <li><a href="activities.html" data-i18n="nav.activities" class="hover:text-amber-400 transition-colors">Nos Activités</a></li>
+                        <li><a href="services.html" data-i18n="nav.services" class="hover:text-amber-400 transition-colors">Nos Services</a></li>
+                        <li><a href="partners.html" data-i18n="nav.partners" class="hover:text-amber-400 transition-colors">Partenaires</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3 : Siège Kinshasa -->
+                <div class="space-y-3">
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-amber-400" data-i18n="footer.kinshasa_title">Siège Kinshasa (RDC)</h3>
+                    <ul class="space-y-2 text-xs text-slate-300">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-location-dot text-chaccopBlue mt-0.5"></i>
+                            <span data-i18n="footer.kinshasa_addr">Centre Culturel Boboto, Avenue Père Boka, Gombe, Kinshasa</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-envelope text-chaccopBlue"></i>
+                            <span>contact@chaccop.org</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-phone text-chaccopBlue"></i>
+                            <span>+243 000 000 000</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Col 4 : Représentation Lisbonne -->
+                <div class="space-y-3">
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-amber-400" data-i18n="footer.lisbon_title">Permanence Lisbonne</h3>
+                    <ul class="space-y-2 text-xs text-slate-300">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-location-dot text-chaccopGreen mt-0.5"></i>
+                            <span data-i18n="footer.lisbon_addr">Lisbonne, Portugal</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-envelope text-chaccopGreen"></i>
+                            <span>lisboa@chaccop.org</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Baseline / Copyright -->
+            <div class="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+                <p data-i18n="footer.copyright">&copy; 2026 CHACCOP ASBL. Tous droits réservés.</p>
+                <p data-i18n="footer.legal">Association Sans But Lucratif régie par la Loi n°004/2001 (RDC)</p>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT JS -->
+    <script>
+        // DOM Elements
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        const langBtnDesktop = document.getElementById('lang-btn-desktop');
+        const langDropdownDesktop = document.getElementById('lang-dropdown-desktop');
+        const currentLangDesktopText = document.getElementById('current-lang-desktop');
+
+        // Toggle Mobile Menu
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const isOpen = !mobileMenu.classList.contains('hidden');
+            menuIcon.className = isOpen ? 'fa-solid fa-xmark text-xl' : 'fa-solid fa-bars text-xl';
+        });
+
+        // Close Mobile Menu on Link Click
+mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        // Laisse 100ms au navigateur pour initier le scroll/redirection
+        setTimeout(() => {
+            mobileMenu.classList.add('hidden');
+            menuIcon.className = 'fa-solid fa-bars text-xl';
+        }, 100);
+    });
+});
+        // Toggle Desktop Language Menu
+        langBtnDesktop.addEventListener('click', (e) => {
+            e.stopPropagation();
+            langDropdownDesktop.classList.toggle('hidden');
+        });
+
+        // Close dropdown when clicking outside
+        window.addEventListener('click', () => {
+            if (!langDropdownDesktop.classList.contains('hidden')) {
+                langDropdownDesktop.classList.add('hidden');
+            }
+        });
+
+        // Dictionnaire i18n
+        const translations = {
+            fr: {
+                nav_home: "Accueil",
+                nav_about: "Qui sommes-nous",
+                nav_objectives: "Objectifs",
+                nav_activities: "Nos Activités",
+                nav_services: "Nos Services",
+                nav_partners: "Partenaires",
+                nav_contact: "Contactez-nous",
+                lang_title: "Langue / Language",
+                hero_badge: "Partenariat Économique Bilatéral",
+                hero_title: "Chambre de Commerce et de l'Industrie <span class=\"text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-amber-300 to-red-400\">RDC–Portugal</span>",
+                hero_desc: "La plateforme officielle pour faciliter les collaborations, mettre en relation les investisseurs et bâtir des partenariats stratégiques et efficaces au service d'un développement commun.",
+                hero_learn_more: "En savoir plus",
+                hero_hours_badge: "Horaires des Services",
+                hero_hours_title: "Permanence CHACCOP",
+                hero_hours_pt: "Dimanche au Jeudi • <span class=\"text-amber-300 font-semibold\">8h00 à 15h00</span>",
+                hero_hours_rdc: "Lundi au Vendredi • <span class=\"text-amber-300 font-semibold\">8h30 à 16h00</span>",
+                about_tag: "À Propos",
+                about_title1: "Chambre de commerce",
+                about_desc1: "La CHACCOP (Chambre de Commerce et de l’Industrie RDC–Portugal) est une initiative stratégique visant à consolider les relations économiques et commerciales entre la République Démocratique du Congo et le Portugal.",
+                about_title2: "Notre vision",
+                about_desc2: "Stimuler l'augmentation durable du volume des échanges commerciaux, promouvoir l'amélioration du climat des affaires et favoriser la création de nouvelles opportunités d'emploi et de partenariats stratégiques entre les deux nations.",
+                about_support_title: "Support Diplomatique & Institutionnel",
+                about_embassy_rdc: "Ambassade de la RDC au Portugal",
+                about_emb_rdc_1: "Faciliter les contacts avec les institutions économiques portugaises.",
+                about_emb_rdc_2: "Identifier les opportunités d’investissement pour les entreprises congolaises.",
+                about_emb_rdc_3: "Appuyer l’organisation des missions économiques et des forums.",
+                about_embassy_pt: "Ambassade du Portugal en RDC",
+                about_emb_pt_1: "Accompagner les entreprises portugaises dans leur implantation en RDC.",
+                about_emb_pt_2: "Promouvoir les secteurs porteurs de la RDC auprès des investisseurs portugais.",
+                about_emb_pt_3: "Soutenir les initiatives de coopération économique et commerciale.",
+                obj_tag: "Axes Majeurs",
+                obj_1_title: "Dialogue Permanent",
+                obj_1_desc: "Créer une plateforme permanente de dialogue et de collaboration entre les opérateurs économiques congolais et portugais.",
+                obj_2_title: "Promotion des IDE",
+                obj_2_desc: "Promouvoir les investissements directs étrangers (IDE) dans les secteurs prioritaires de la RDC.",
+                obj_3_title: "Échanges Bilatéraux",
+                obj_3_desc: "Faciliter activement les échanges commerciaux, technologiques et culturels entre les deux pays.",
+                obj_4_title: "Visibilité Accrue",
+                obj_4_desc: "Renforcer la visibilité et l'impact des entreprises des deux pays sur leurs marchés respectifs.",
+                obj_cta: "En savoir plus",
+                act_tag: "Programme",
+                act_card1_tag: "Événements",
+                act_card1_title: "Forums & Lancement",
+                act_card1_desc: "Lancement officiel sous le haut patronage des deux Ambassades et organisation de forums économiques annuels alternés entre Kinshasa et Lisbonne.",
+                act_card2_tag: "Orientation",
+                act_card2_title: "Guichet Unique",
+                act_card2_desc: "Création d’un guichet unique d’information complet dédié aux investisseurs et mise en place du répertoire officiel des entreprises membres.",
+                act_card3_tag: "Analyse",
+                act_card3_title: "Bulletins Économiques",
+                act_card3_desc: "Publication régulière de bulletins économiques et d'analyses sectorielles pour offrir des perspectives d'affaires fiables aux investisseurs.",
+                srv_tag: "Accompagnement",
+                srv_card1_tag: "Implantation",
+                srv_card1_title: "Support Stratégique",
+                srv_card1_desc: "Accompagnement personnalisé pour l'implantation d'entreprises portugaises en RDC et de sociétés congolaises au Portugal.",
+                srv_card2_tag: "Réseautage",
+                srv_card2_title: "Mise en Relation B2B",
+                srv_card2_desc: "Organisation de missions économiques sur-mesure et facilitation de rencontres B2B directes avec les décideurs locaux.",
+                srv_card3_tag: "Conseil",
+                srv_card3_title: "Partenariats Public-Privé",
+                srv_card3_desc: "Assistance juridique, réglementaire et commerciale en étroite synergie avec les agences officielles de promotion des investissements.",
+                part_tag: "Partenaires",
+                part_min_com: "Ministère du Commerce Extérieur (RDC)",
+                part_min_affaires: "Ministère des Affaires Étrangères (Portugal)",
+                part_fec: "FEC (Fédération des Entreprises du Congo)",
+                contact_tag: "Localisation & Info",
+                contact_kin_title: "Adresse à Kinshasa",
+                contact_kin_sub: "CHACCOP – Représentation RDC",
+                contact_kin_desc: "Kinshasa, République Démocratique du Congo (En synergie avec la FEC & ANAPI)",
+                contact_lis_title: "Adresse à Lisbonne",
+                contact_lis_sub: "CHACCOP – Représentation Portugal",
+                contact_lis_desc: "Lisbonne, Portugal (En synergie avec AICEP Portugal Global)",
+                contact_info_title: "Informations de contact",
+                contact_email_label: "Email :",
+                contact_sec: "Secrétariat Général",
+                contact_form_note: "Formulaire et numéros officiels à compléter lors du lancement officiel.",
+                "footer.desc": "Chambre de Commerce et d'Industrie RDC-Portugal (ASBL). L'organe de référence pour dynamiser les échanges économiques, industriels et commerciaux bilatéraux.",
+        "footer.links_title": "Navigation",
+        "footer.kinshasa_title": "Siège Kinshasa (RDC)",
+        "footer.kinshasa_addr": "Centre Culturel Boboto, Avenue Père Boka, Gombe, Kinshasa",
+        "footer.lisbon_title": "Permanence Lisbonne",
+        "footer.lisbon_addr": "Lisbonne, Portugal",
+        "footer.copyright": "© 2026 CHACCOP ASBL. Tous droits réservés.",
+        "footer.legal": "Association Sans But Lucratif régie par la Loi n°004/2001 (RDC)"
+            },
+            en: {
+                nav_home: "Home",
+                nav_about: "About Us",
+                nav_objectives: "Objectives",
+                nav_activities: "Our Activities",
+                nav_services: "Our Services",
+                nav_partners: "Partners",
+                nav_contact: "Contact Us",
+                lang_title: "Language / Langue",
+                hero_badge: "Bilateral Economic Partnership",
+                hero_title: "Chamber of Commerce and Industry <span class=\"text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-amber-300 to-red-400\">DRC–Portugal</span>",
+                hero_desc: "The official platform to facilitate collaborations, connect investors, and build strategic partnerships for mutual development.",
+                hero_learn_more: "Learn More",
+                hero_hours_badge: "Service Hours",
+                hero_hours_title: "CHACCOP Office Hours",
+                hero_hours_pt: "Sunday to Thursday • <span class=\"text-amber-300 font-semibold\">8:00 AM to 3:00 PM</span>",
+                hero_hours_rdc: "Monday to Friday • <span class=\"text-amber-300 font-semibold\">8:30 AM to 4:00 PM</span>",
+                about_tag: "About Us",
+                about_title1: "Chamber of Commerce",
+                about_desc1: "CHACCOP (Chamber of Commerce and Industry DRC–Portugal) is a strategic initiative aimed at strengthening economic and trade relations between the Democratic Republic of the Congo and Portugal.",
+                about_title2: "Our Vision",
+                about_desc2: "To stimulate sustainable trade volume, enhance the business climate, and promote new employment and strategic partnership opportunities between both nations.",
+                about_support_title: "Diplomatic & Institutional Support",
+                about_embassy_rdc: "DRC Embassy in Portugal",
+                about_emb_rdc_1: "Facilitate connections with Portuguese economic institutions.",
+                about_emb_rdc_2: "Identify investment opportunities for Congolese businesses.",
+                about_emb_rdc_3: "Support the organization of trade missions and forums.",
+                about_embassy_pt: "Portuguese Embassy in DRC",
+                about_emb_pt_1: "Assist Portuguese companies in setting up operations in DRC.",
+                about_emb_pt_2: "Promote key Congolese sectors to Portuguese investors.",
+                about_emb_pt_3: "Support economic and commercial cooperation initiatives.",
+                obj_tag: "Key Pillars",
+                obj_1_title: "Ongoing Dialogue",
+                obj_1_desc: "Establish a permanent platform for exchange and collaboration between Congolese and Portuguese business leaders.",
+                obj_2_title: "FDI Promotion",
+                obj_2_desc: "Promote Foreign Direct Investment (FDI) in priority sectors across the DRC.",
+                obj_3_title: "Bilateral Trade",
+                obj_3_desc: "Actively facilitate commercial, technological, and cultural exchanges between both nations.",
+                obj_4_title: "Enhanced Visibility",
+                obj_4_desc: "Increase the market presence and impact of member companies in both countries.",
+                obj_cta: "Learn More",
+                act_tag: "Program",
+                act_card1_tag: "Events",
+                act_card1_title: "Forums & Launch",
+                act_card1_desc: "Official launch under the auspices of both Embassies and organization of annual economic forums alternating between Kinshasa and Lisbon.",
+                act_card2_tag: "Guidance",
+                act_card2_title: "One-Stop Shop",
+                act_card2_desc: "Creation of a comprehensive information desk for investors and publication of the official member directory.",
+                act_card3_tag: "Analysis",
+                act_card3_title: "Economic Bulletins",
+                act_card3_desc: "Regular publication of economic reports and sector analyses to provide reliable market insights for investors.",
+                srv_tag: "Support",
+                srv_card1_tag: "Settlement",
+                srv_card1_title: "Strategic Support",
+                srv_card1_desc: "Tailored assistance for Portuguese businesses setting up in DRC and Congolese firms expanding into Portugal.",
+                srv_card2_tag: "Networking",
+                srv_card2_title: "B2B Matchmaking",
+                srv_card2_desc: "Organization of customized trade missions and facilitation of direct B2B meetings with key local decision-makers.",
+                srv_card3_tag: "Advisory",
+                srv_card3_title: "Public-Private Partnerships",
+                srv_card3_desc: "Legal, regulatory, and commercial assistance in close synergy with official investment promotion agencies.",
+                part_tag: "Partners",
+                part_min_com: "Ministry of Foreign Trade (DRC)",
+                part_min_affaires: "Ministry of Foreign Affairs (Portugal)",
+                part_fec: "FEC (Federation of Congolese Enterprises)",
+                contact_tag: "Location & Info",
+                contact_kin_title: "Kinshasa Office",
+                contact_kin_sub: "CHACCOP – DRC Delegation",
+                contact_kin_desc: "Kinshasa, Democratic Republic of the Congo (In synergy with FEC & ANAPI)",
+                contact_lis_title: "Lisbon Office",
+                contact_lis_sub: "CHACCOP – Portugal Delegation",
+                contact_lis_desc: "Lisbon, Portugal (In synergy with AICEP Portugal Global)",
+                contact_info_title: "Contact Details",
+                contact_email_label: "Email:",
+                contact_sec: "General Secretariat",
+                contact_form_note: "Official contact numbers and form to be made available at official launch.",
+                "footer.desc": "DRC-Portugal Chamber of Commerce and Industry (ASBL). The benchmark organization for boosting bilateral economic, industrial, and commercial exchanges.",
+        "footer.links_title": "Navigation",
+        "footer.kinshasa_title": "Kinshasa Headquarters (DRC)",
+        "footer.kinshasa_addr": "Boboto Cultural Center, Père Boka Avenue, Gombe, Kinshasa",
+        "footer.lisbon_title": "Lisbon Office",
+        "footer.lisbon_addr": "Lisbon, Portugal",
+        "footer.copyright": "© 2026 CHACCOP ASBL. All rights reserved.",
+        "footer.legal": "Non-profit organization governed by Law No. 004/2001 (DRC)"
+            },
+            pt: {
+                nav_home: "Início",
+                nav_about: "Quem somos",
+                nav_objectives: "Objetivos",
+                nav_activities: "Atividades",
+                nav_services: "Serviços",
+                nav_partners: "Parceiros",
+                nav_contact: "Contacte-nos",
+                lang_title: "Língua / Language",
+                hero_badge: "Parceria Económica Bilateral",
+                hero_title: "Câmara de Comércio e Indústria <span class=\"text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-amber-300 to-red-400\">RDC–Portugal</span>",
+                hero_desc: "A plataforma oficial para facilitar colaborações, conectar investidores e construir parcerias estratégicas para o desenvolvimento mútuo.",
+                hero_learn_more: "Saber mais",
+                hero_hours_badge: "Horário de Funcionamento",
+                hero_hours_title: "Permanência CHACCOP",
+                hero_hours_pt: "Domingo a Quinta-feira • <span class=\"text-amber-300 font-semibold\">8h00 às 15h00</span>",
+                hero_hours_rdc: "Segunda a Sexta-feira • <span class=\"text-amber-300 font-semibold\">8h30 às 16h00</span>",
+                about_tag: "Sobre Nós",
+                about_title1: "Câmara de Comércio",
+                about_desc1: "A CHACCOP (Câmara de Comércio e Indústria RDC–Portugal) é uma iniciativa estratégica para reforçar as relações económicas e comerciais entre a República Democrática do Congo e Portugal.",
+                about_title2: "A Nossa Visão",
+                about_desc2: "Promover o aumento sustentável do comércio bilateral, melhorar o clima de negócios e criar novas oportunidades de emprego e parcerias entre ambas as nações.",
+                about_support_title: "Apoio Diplomático e Institucional",
+                about_embassy_rdc: "Embaixada da RDC em Portugal",
+                about_emb_rdc_1: "Facilitar contactos com instituições económicas portuguesas.",
+                about_emb_rdc_2: "Identificar oportunidades de investimento para empresas congolesas.",
+                about_emb_rdc_3: "Apoiar a organização de missões económicas e fóruns.",
+                about_embassy_pt: "Embaixada de Portugal na RDC",
+                about_emb_pt_1: "Acompanhar empresas portuguesas na sua instalação na RDC.",
+                about_emb_pt_2: "Promover setores prioritários da RDC junto de investidores portugueses.",
+                about_emb_pt_3: "Apoiar iniciativas de cooperação económica e comercial.",
+                obj_tag: "Eixos Principais",
+                obj_1_title: "Diálogo Permanente",
+                obj_1_desc: "Criar uma plataforma contínua de diálogo e colaboração entre empresários congoleses e portugueses.",
+                obj_2_title: "Promoção do IDE",
+                obj_2_desc: "Promover o Investimento Directo Estrangeiro (IDE) em sectores prioritários da RDC.",
+                obj_3_title: "Trocas Bilaterais",
+                obj_3_desc: "Facilitar trocas comerciais, tecnológicas e culturais entre ambos os países.",
+                obj_4_title: "Maior Visibilidade",
+                obj_4_desc: "Aumentar a presença e impacto das empresas nos respetivos mercados.",
+                "obj_cta": "Saiba mais",
+                act_tag: "Programa",
+                act_card1_tag: "Eventos",
+                act_card1_title: "Fóruns e Lançamento",
+                act_card1_desc: "Lançamento oficial sob o patrocínio de ambas as Embaixadas e realização de fóruns económicos anuais alternados entre Kinshasa e Lisboa.",
+                act_card2_tag: "Orientação",
+                act_card2_title: "Balcão Único",
+                act_card2_desc: "Criação de um balcão único de informação para investidores e publicação do diretório oficial de membros.",
+                act_card3_tag: "Análise",
+                act_card3_title: "Boletins Económicos",
+                act_card3_desc: "Publicação regular de relatórios económicos e análises sectoriais para orientar investidores.",
+                srv_tag: "Acompanhamento",
+                srv_card1_tag: "Instalação",
+                srv_card1_title: "Apoio Estratégico",
+                srv_card1_desc: "Apoio personalizado à instalação de empresas portuguesas na RDC e empresas congolesas em Portugal.",
+                srv_card2_tag: "Networking",
+                srv_card2_title: "Encontros B2B",
+                srv_card2_desc: "Organização de missões empresariais à medida e facilitação de reuniões B2B com decisores locais.",
+                srv_card3_tag: "Consultoria",
+                srv_card3_title: "Parcerias Público-Privadas",
+                srv_card3_desc: "Assistência jurídica, regulamentar e comercial em articulação com agências oficiais de promoção de investimentos.",
+                part_tag: "Parceiros",
+                part_min_com: "Ministério do Comércio Externo (RDC)",
+                part_min_affaires: "Ministério dos Negócios Estrangeiros (Portugal)",
+                part_fec: "FEC (Federação das Empresas do Congo)",
+                contact_tag: "Localização e Info",
+                contact_kin_title: "Endereço em Kinshasa",
+                contact_kin_sub: "CHACCOP – Representação RDC",
+                contact_kin_desc: "Kinshasa, República Democrática do Congo (Em sinergia com a FEC e ANAPI)",
+                contact_lis_title: "Endereço em Lisboa",
+                contact_lis_sub: "CHACCOP – Representação Portugal",
+                contact_lis_desc: "Lisboa, Portugal (Em sinergia com a AICEP Portugal Global)",
+                contact_info_title: "Informações de Contacto",
+                contact_email_label: "Email:",
+                contact_sec: "Secretaria-Geral",
+                contact_form_note: "Contacto telefónico e formulário a disponibilizar no lançamento oficial.",
+                "footer.desc": "Câmara de Comércio e Indústria RDC-Portugal (ASBL). O órgão de referência para dinamizar as trocas económicas, industriais e comerciais bilaterais.",
+        "footer.links_title": "Navegação",
+        "footer.kinshasa_title": "Sede Kinshasa (RDC)",
+        "footer.kinshasa_addr": "Centro Cultural Boboto, Avenida Père Boka, Gombe, Kinshasa",
+        "footer.lisbon_title": "Permanência Lisboa",
+        "footer.lisbon_addr": "Lisboa, Portugal",
+        "footer.copyright": "© 2026 CHACCOP ASBL. Todos os direitos reservados.",
+        "footer.legal": "Associação Sem Fins Lucrativos regida pela Lei n.º 004/2001 (RDC)"
+            }
+        };
+
+        // Function to Switch Languages
+        function changeLanguage(langName, langCode) {
+            // Update desktop selector label
+            if (currentLangDesktopText) {
+                currentLangDesktopText.textContent = langName;
+            }
+
+            // Close Desktop Dropdown
+            if (langDropdownDesktop) {
+                langDropdownDesktop.classList.add('hidden');
+            }
+
+            // Close Mobile Menu if open
+            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+                menuIcon.className = 'fa-solid fa-bars text-xl';
+            }
+
+            // Apply translations
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[langCode] && translations[langCode][key]) {
+                    element.innerHTML = translations[langCode][key];
+                }
+            });
+
+            // Update html lang attribute
+            document.documentElement.lang = langCode;
+        }
+    </script>
+</body>
+</html>

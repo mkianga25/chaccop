@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHACCOP - Nos Activités</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        chaccopBlue: '#0052B4',
+                        chaccopRed: '#D92D20',
+                        chaccopYellow: '#FFC72C',
+                        chaccopGreen: '#009739',
+                        chaccopDark: '#1E293B',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-chaccopBlue selection:text-white flex flex-col min-h-screen">
+
+    <!-- HEADER -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100 py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center space-x-3">
+                <img src="chaccop_logo.png" alt="CHACCOP Logo" class="h-16 w-auto object-contain rounded">
+            </a>
+
+            <!-- Navigation Desktop -->
+            <nav class="hidden md:flex items-center space-x-6 text-sm font-semibold text-slate-700">
+                <a href="index.html" data-i18n="nav.home" class="hover:text-chaccopBlue transition-colors">Accueil</a>
+                <a href="about.html" data-i18n="nav.about" class="hover:text-chaccopBlue transition-colors">Qui sommes-nous</a>
+                <a href="objectives.html" data-i18n="nav.objectives" class="hover:text-chaccopBlue transition-colors">Objectifs</a>
+                <a href="activities.html" data-i18n="nav.activities" class="text-chaccopBlue font-bold transition-colors">Nos Activités</a>
+                <a href="services.html" data-i18n="nav.services" class="hover:text-chaccopBlue transition-colors">Nos Services</a>
+                <a href="partners.html" data-i18n="nav.partners" class="hover:text-chaccopBlue transition-colors">Partenaires</a>
+            </nav>
+
+            <!-- Menu Langue + Call To Action -->
+            <div class="flex items-center space-x-4">
+                
+                <!-- DROPDOWN LANGUE (DESKTOP) -->
+                <div class="relative hidden sm:block">
+                    <button id="lang-btn-desktop" class="flex items-center space-x-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-lg border border-slate-200 transition-colors">
+                        <i class="fa-solid fa-globe text-slate-500"></i>
+                        <span id="current-lang-desktop">Français</span>
+                        <i class="fa-solid fa-chevron-down text-[10px] text-slate-400"></i>
+                    </button>
+
+                    <!-- Menu Déroulant Desktop -->
+                    <div id="lang-dropdown-desktop" class="hidden absolute right-0 mt-2 w-36 bg-white border border-slate-200 rounded-xl shadow-xl py-1 z-50">
+                        <button onclick="changeLanguage('Français', 'fr')" class="w-full text-left px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-chaccopBlue flex items-center justify-between">
+                            <span>Français</span>
+                            <span class="text-[10px] text-slate-400">FR</span>
+                        </button>
+                        <button onclick="changeLanguage('English', 'en')" class="w-full text-left px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-chaccopBlue flex items-center justify-between">
+                            <span>English</span>
+                            <span class="text-[10px] text-slate-400">EN</span>
+                        </button>
+                        <button onclick="changeLanguage('Português', 'pt')" class="w-full text-left px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-chaccopBlue flex items-center justify-between">
+                            <span>Português</span>
+                            <span class="text-[10px] text-slate-400">PT</span>
+                        </button>
+                    </div>
+                </div>
+
+                <a href="#contact" data-i18n="btn.contact" class="px-4 py-2 text-xs sm:text-sm font-bold text-white bg-chaccopBlue hover:bg-blue-700 rounded-lg shadow-sm transition-colors">
+                    Contactez-nous
+                </a>
+
+                <!-- Bouton Hamburger Mobile -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-slate-700 rounded-lg hover:bg-slate-100 focus:outline-none">
+                    <i id="menu-icon" class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Menu Déroulant Mobile -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-2 shadow-lg">
+            <a href="index.html" data-i18n="nav.home" class="mobile-link block px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-lg">Accueil</a>
+            <a href="about.html" data-i18n="nav.about" class="mobile-link block px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-lg">Qui sommes-nous</a>
+            <a href="objectives.html" data-i18n="nav.objectives" class="mobile-link block px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-lg">Objectifs</a>
+            <a href="activities.html" data-i18n="nav.activities" class="mobile-link block px-4 py-2 text-sm font-semibold text-chaccopBlue bg-blue-50 rounded-lg">Nos Activités</a>
+            <a href="services.html" data-i18n="nav.services" class="mobile-link block px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-lg">Nos Services</a>
+            <a href="partners.html" data-i18n="nav.partners" class="mobile-link block px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-lg">Partenaires</a>
+
+            <!-- Sélecteur de Langue Mobile -->
+            <div class="pt-3 border-t border-slate-100 px-4">
+                <span data-i18n="lang.title" class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-2">Langue / Language</span>
+                <div class="grid grid-cols-3 gap-2">
+                    <button onclick="changeLanguage('Français', 'fr')" class="py-2 text-center text-xs font-bold bg-slate-100 hover:bg-blue-50 hover:text-chaccopBlue rounded-lg border border-slate-200">FR</button>
+                    <button onclick="changeLanguage('English', 'en')" class="py-2 text-center text-xs font-bold bg-slate-100 hover:bg-blue-50 hover:text-chaccopBlue rounded-lg border border-slate-200">EN</button>
+                    <button onclick="changeLanguage('Português', 'pt')" class="py-2 text-center text-xs font-bold bg-slate-100 hover:bg-blue-50 hover:text-chaccopBlue rounded-lg border border-slate-200">PT</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow">
+        <!-- Banner En-tête -->
+        <section class="bg-slate-900 text-white py-16 relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-r from-blue-950 via-slate-900 to-slate-900 opacity-90"></div>
+            <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+                <span class="text-xs font-bold uppercase tracking-widest text-amber-400 bg-amber-400/10 border border-amber-400/20 px-3 py-1 rounded-full" data-i18n="act.page_badge">
+                    Actions & Déploiements
+                </span>
+                <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight" data-i18n="act.page_title">
+                    Nos Activités Opérationnelles
+                </h1>
+                <p class="text-slate-300 max-w-2xl mx-auto text-base sm:text-lg" data-i18n="act.page_subtitle">
+                    Découvrez les initiatives concrètes menées par la CHACCOP pour connecter les marchés congolais et portugais.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section Grille des Activités -->
+        <section class="py-16 bg-white text-slate-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <!-- Activity Card 1 -->
+                    <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 hover:shadow-lg transition flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="w-12 h-12 bg-blue-100 text-chaccopBlue rounded-xl flex items-center justify-center text-xl font-bold">
+                                <i class="fa-solid fa-plane-departure"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900" data-i18n="act.a1_title">Missions Économiques B2B</h3>
+                            <p class="text-slate-600 text-xs leading-relaxed" data-i18n="act.a1_desc">
+                                Organisation de voyages d'affaires ciblés pour les chefs d'entreprises entre Kinshasa et Lisbonne avec rendez-vous d'affaires individuels pré-qualifiés.
+                            </p>
+                        </div>
+                        <div class="pt-6 border-t border-slate-200 mt-6 flex justify-between items-center text-xs font-semibold text-chaccopBlue">
+                            <span data-i18n="act.a1_tag">Événement & Réseautage</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                    </div>
+
+                    <!-- Activity Card 2 -->
+                    <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 hover:shadow-lg transition flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="w-12 h-12 bg-emerald-100 text-chaccopGreen rounded-xl flex items-center justify-center text-xl font-bold">
+                                <i class="fa-solid fa-building-columns"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900" data-i18n="act.a2_title">Forums & Salons Bilatéraux</h3>
+                            <p class="text-slate-600 text-xs leading-relaxed" data-i18n="act.a2_desc">
+                                Organisation annuelle de grands rassemblements économiques, tables rondes sectorielles et espaces d'exposition pour promouvoir les innovations et les opportunités d'investissement.
+                            </p>
+                        </div>
+                        <div class="pt-6 border-t border-slate-200 mt-6 flex justify-between items-center text-xs font-semibold text-chaccopGreen">
+                            <span data-i18n="act.a2_tag">Rencontres Institutionnelles</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                    </div>
+
+                    <!-- Activity Card 3 -->
+                    <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 hover:shadow-lg transition flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center text-xl font-bold">
+                                <i class="fa-solid fa-graduation-cap"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900" data-i18n="act.a3_title">Ateliers & Formations</h3>
+                            <p class="text-slate-600 text-xs leading-relaxed" data-i18n="act.a3_desc">
+                                Sessions de renforcement des capacités sur la fiscalité, les procédures douanières, les transferts technologiques et les réglementations commerciales RDC-Portugal.
+                            </p>
+                        </div>
+                        <div class="pt-6 border-t border-slate-200 mt-6 flex justify-between items-center text-xs font-semibold text-amber-600">
+                            <span data-i18n="act.a3_tag">Renforcement des Capacités</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="contact" class="bg-slate-900 text-white border-t border-slate-800 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Col 1 : À Propos -->
+                <div class="space-y-4">
+                    <img src="chaccop_logo.png" alt="CHACCOP Logo" class="h-14 w-auto object-contain bg-white/10 p-2 rounded-lg">
+                    <p class="text-slate-400 text-xs leading-relaxed" data-i18n="footer.desc">
+                        Chambre de Commerce et d'Industrie RDC-Portugal (ASBL). L'organe de référence pour dynamiser les échanges économiques, industriels et commerciaux bilatéraux.
+                    </p>
+                    <div class="flex space-x-3 text-slate-400">
+                        <a href="#" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-chaccopBlue hover:text-white flex items-center justify-center transition-colors"><i class="fa-brands fa-linkedin-in text-sm"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-chaccopBlue hover:text-white flex items-center justify-center transition-colors"><i class="fa-brands fa-facebook-f text-sm"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-chaccopBlue hover:text-white flex items-center justify-center transition-colors"><i class="fa-brands fa-twitter text-sm"></i></a>
+                    </div>
+                </div>
+
+                <!-- Col 2 : Navigation Rapide -->
+                <div class="space-y-3">
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-amber-400" data-i18n="footer.links_title">Navigation</h3>
+                    <ul class="space-y-2 text-xs font-medium text-slate-300">
+                        <li><a href="index.html" data-i18n="nav.home" class="hover:text-amber-400 transition-colors">Accueil</a></li>
+                        <li><a href="about.html" data-i18n="nav.about" class="hover:text-amber-400 transition-colors">Qui sommes-nous</a></li>
+                        <li><a href="objectives.html" data-i18n="nav.objectives" class="hover:text-amber-400 transition-colors">Objectifs Stratégiques</a></li>
+                        <li><a href="activities.html" data-i18n="nav.activities" class="hover:text-amber-400 transition-colors">Nos Activités</a></li>
+                        <li><a href="services.html" data-i18n="nav.services" class="hover:text-amber-400 transition-colors">Nos Services</a></li>
+                        <li><a href="partners.html" data-i18n="nav.partners" class="hover:text-amber-400 transition-colors">Partenaires</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3 : Siège Kinshasa -->
+                <div class="space-y-3">
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-amber-400" data-i18n="footer.kinshasa_title">Siège Kinshasa (RDC)</h3>
+                    <ul class="space-y-2 text-xs text-slate-300">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-location-dot text-chaccopBlue mt-0.5"></i>
+                            <span>Centre Culturel Boboto, Avenue Père Boka, Gombe, Kinshasa</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-envelope text-chaccopBlue"></i>
+                            <span>contact@chaccop.org</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-phone text-chaccopBlue"></i>
+                            <span>+243 000 000 000</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Col 4 : Représentation Lisbonne -->
+                <div class="space-y-3">
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-amber-400" data-i18n="footer.lisbon_title">Permanence Lisbonne</h3>
+                    <ul class="space-y-2 text-xs text-slate-300">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-location-dot text-chaccopGreen mt-0.5"></i>
+                            <span>Lisbonne, Portugal</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-envelope text-chaccopGreen"></i>
+                            <span>lisboa@chaccop.org</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Baseline / Copyright -->
+            <div class="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+                <p>&copy; 2026 CHACCOP ASBL. Tous droits réservés.</p>
+                <p data-i18n="footer.legal">Association Sans But Lucratif régie par la Loi n°004/2001 (RDC)</p>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- JS & TRADUCTIONS -->
+    <script>
+        const translations = {
+            fr: {
+                "nav.home": "Accueil",
+                "nav.about": "Qui sommes-nous",
+                "nav.objectives": "Objectifs",
+                "nav.activities": "Nos Activités",
+                "nav.services": "Nos Services",
+                "nav.partners": "Partenaires",
+                "btn.contact": "Contactez-nous",
+                "lang.title": "Langue / Language",
+                "act.page_badge": "Actions & Déploiements",
+                "act.page_title": "Nos Activités Opérationnelles",
+                "act.page_subtitle": "Découvrez les initiatives concrètes menées par la CHACCOP pour connecter les marchés congolais et portugais.",
+                "act.a1_title": "Missions Économiques B2B",
+                "act.a1_desc": "Organisation de voyages d'affaires ciblés pour les chefs d'entreprises entre Kinshasa et Lisbonne avec rendez-vous d'affaires individuels pré-qualifiés.",
+                "act.a1_tag": "Événement & Réseautage",
+                "act.a2_title": "Forums & Salons Bilatéraux",
+                "act.a2_desc": "Organisation annuelle de grands rassemblements économiques, tables rondes sectorielles et espaces d'exposition pour promouvoir les innovations et les opportunités d'investissement.",
+                "act.a2_tag": "Rencontres Institutionnelles",
+                "act.a3_title": "Ateliers & Formations",
+                "act.a3_desc": "Sessions de renforcement des capacités sur la fiscalité, les procédures douanières, les transferts technologiques et les réglementations commerciales RDC-Portugal.",
+                "act.a3_tag": "Renforcement des Capacités",
+                "footer.desc": "Chambre de Commerce et d'Industrie RDC-Portugal (ASBL). L'organe de référence pour dynamiser les échanges économiques, industriels et commerciaux bilatéraux.",
+                "footer.links_title": "Navigation",
+                "footer.kinshasa_title": "Siège Kinshasa (RDC)",
+                "footer.lisbon_title": "Permanence Lisbonne",
+                "footer.legal": "Association Sans But Lucratif régie par la Loi n°004/2001 (RDC)"
+            },
+            pt: {
+                "nav.home": "Início",
+                "nav.about": "Sobre Nós",
+                "nav.objectives": "Objetivos",
+                "nav.activities": "Nossas Atividades",
+                "nav.services": "Nossos Serviços",
+                "nav.partners": "Parceiros",
+                "btn.contact": "Contacte-nos",
+                "lang.title": "Língua / Language",
+                "act.page_badge": "Ações e Implantações",
+                "act.page_title": "Nossas Atividades Operacionais",
+                "act.page_subtitle": "Descubra as iniciativas concretas promovidas pela CHACCOP para conectar os mercados congolês e português.",
+                "act.a1_title": "Missões Económicas B2B",
+                "act.a1_desc": "Organização de viagens de negócios direcionadas para empresários entre Kinshasa e Lisboa, com reuniões individuais pré-qualificadas.",
+                "act.a1_tag": "Eventos e Networking",
+                "act.a2_title": "Fóruns e Feiras Bilaterais",
+                "act.a2_desc": "Organização anual de grandes encontros económicos, mesas redondas e exposições para promover inovações e oportunidades de investimento.",
+                "act.a2_tag": "Encontros Institucionais",
+                "act.a3_title": "Workshops e Formação",
+                "act.a3_desc": "Sessões de capacitação sobre fiscalidade, procedimentos alfandegários, transferência de tecnologia e regulamentações comerciais RDC-Portugal.",
+                "act.a3_tag": "Capacitação Profissional",
+                "footer.desc": "Câmara de Comércio e Indústria RDC-Portugal (ASBL). O órgão de referência para dinamizar as trocas económicas, industriais e comerciais bilaterais.",
+                "footer.links_title": "Navegação",
+                "footer.kinshasa_title": "Sede Kinshasa (RDC)",
+                "footer.lisbon_title": "Permanência Lisboa",
+                "footer.legal": "Associação Sem Fins Lucrativos regida pela Lei n.º 004/2001 (RDC)"
+            },
+            en: {
+                "nav.home": "Home",
+                "nav.about": "About Us",
+                "nav.objectives": "Objectives",
+                "nav.activities": "Our Activities",
+                "nav.services": "Our Services",
+                "nav.partners": "Partners",
+                "btn.contact": "Contact Us",
+                "lang.title": "Language / Langue",
+                "act.page_badge": "Actions & Deployments",
+                "act.page_title": "Our Operational Activities",
+                "act.page_subtitle": "Discover concrete initiatives led by CHACCOP to connect DRC and Portuguese markets.",
+                "act.a1_title": "B2B Economic Missions",
+                "act.a1_desc": "Organization of targeted business trips for business leaders between Kinshasa and Lisbon with pre-qualified individual B2B meetings.",
+                "act.a1_tag": "Events & Networking",
+                "act.a2_title": "Bilateral Forums & Fairs",
+                "act.a2_desc": "Annual organization of major economic gatherings, sector roundtables, and exhibition spaces to showcase innovations and investment opportunities.",
+                "act.a2_tag": "Institutional Meetings",
+                "act.a3_title": "Workshops & Training",
+                "act.a3_desc": "Capacity-building sessions covering taxation, customs procedures, technology transfer, and DRC-Portugal trade regulations.",
+                "act.a3_tag": "Capacity Building",
+                "footer.desc": "DRC-Portugal Chamber of Commerce and Industry (ASBL). The benchmark organization for boosting bilateral economic, industrial, and commercial exchanges.",
+                "footer.links_title": "Navigation",
+                "footer.kinshasa_title": "Kinshasa Headquarters (DRC)",
+                "footer.lisbon_title": "Lisbon Office",
+                "footer.legal": "Non-profit organization governed by Law No. 004/2001 (DRC)"
+            }
+        };
+
+        function changeLanguage(label, code) {
+            if (!translations[code]) return;
+            document.querySelectorAll('[data-i18n]').forEach((element) => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[code][key]) {
+                    element.textContent = translations[code][key];
+                }
+            });
+            const currentLangLabel = document.getElementById('current-lang-desktop');
+            if (currentLangLabel) currentLangLabel.textContent = label;
+            localStorage.setItem('chaccop_lang_code', code);
+            localStorage.setItem('chaccop_lang_label', label);
+            const dropdown = document.getElementById('lang-dropdown-desktop');
+            if (dropdown) dropdown.classList.add('hidden');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileBtn && mobileMenu) {
+                mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+            }
+
+            const langBtnDesktop = document.getElementById('lang-btn-desktop');
+            const langDropdownDesktop = document.getElementById('lang-dropdown-desktop');
+            if (langBtnDesktop && langDropdownDesktop) {
+                langBtnDesktop.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    langDropdownDesktop.classList.toggle('hidden');
+                });
+                document.addEventListener('click', () => langDropdownDesktop.classList.add('hidden'));
+            }
+
+            const savedCode = localStorage.getItem('chaccop_lang_code') || 'fr';
+            const savedLabel = localStorage.getItem('chaccop_lang_label') || 'Français';
+            changeLanguage(savedLabel, savedCode);
+        });
+    </script>
+</body>
+</html>

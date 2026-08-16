@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHACCOP - Nos Objectifs Stratégiques</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        chaccopBlue: '#0052B4',
+                        chaccopRed: '#D92D20',
+                        chaccopYellow: '#FFC72C',
+                        chaccopGreen: '#009739',
+                        chaccopDark: '#1E293B',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-chaccopBlue selection:text-white flex flex-col min-h-screen">
+
+    <!-- HEADER -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100 py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center space-x-3">
+                <img src="chaccop_logo.png" alt="CHACCOP Logo" class="h-16 w-auto object-contain rounded">
+            </a>
+
+            <!-- Navigation Desktop -->
+            <nav class="hidden md:flex items-center space-x-6 text-sm font-semibold text-slate-700">
+                <a href="index.html" data-i18n="nav.home" class="hover:text-chaccopBlue transition-colors">Accueil</a>
+                <a href="about.html" data-i18n="nav.about" class="hover:text-chaccopBlue transition-colors">Qui sommes-nous</a>
+                <a href="objectives.html" data-i18n="nav.objectives" class="text-chaccopBlue font-bold transition-colors">Objectifs</a>
+                <a href="activities.html" data-i18n="nav.activities" class="hover:text-chaccopBlue transition-colors">Nos Activités</a>
+                <a href="services.html" data-i18n="nav.services" class="hover:text-chaccopBlue transition-colors">Nos Services</a>
+                <a href="partners.html" data-i18n="nav.partners" class="hover:text-chaccopBlue transition-colors">Partenaires</a>
+            </nav>
+
+            <!-- Menu Langue + Call To Action -->
+            <div class="flex items-center space-x-4">
+                
+                <!-- DROPDOWN LANGUE (DESKTOP) -->
+                <div class="relative hidden sm:block">
+                    <button id="lang-btn-desktop" class="flex items-center space-x-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-lg border border-slate-200 transition-colors">
+                        <i class="fa-solid fa-globe text-slate-500"></i>
+                        <span id="current-lang-desktop">Français</span>
+                        <i class="fa-solid fa-chevron-down text-[10px] text-slate-400"></i>
+                    </button>
+
+                    <!-- Menu Déroulant Desktop -->
+                    <div id="lang-dropdown-desktop" class="hidden absolute right-0 mt-2 w-36 bg-white border border-slate-200 rounded-xl shadow-xl py-1 z-50">
+                        <button onclick="changeLanguage('Français', 'fr')" class="w-full text-left px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-chaccopBlue flex items-center justify-between">
+                            <span>Français</span>
+                            <span class="text-[10px] text-slate-400">FR</span>
+                        </button>
+                        <button onclick="changeLanguage('English', 'en')" class="w-full text-left px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-chaccopBlue flex items-center justify-between">
+                            <span>English</span>
+                            <span class="text-[10px] text-slate-400">EN</span>
+                        </button>
+                        <button onclick="changeLanguage('Português', 'pt')" class="w-full text-left px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-chaccopBlue flex items-center justify-between">
+                            <span>Português</span>
+                            <span class="text-[10px] text-slate-400">PT</span>
+                        </button>
+                    </div>
+                </div>
+
+                <a href="#contact" data-i18n="btn.contact" class="px-4 py-2 text-xs sm:text-sm font-bold text-white bg-chaccopBlue hover:bg-blue-700 rounded-lg shadow-sm transition-colors">
+                    Contactez-nous
+                </a>
+
+                <!-- Bouton Hamburger Mobile -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-slate-700 rounded-lg hover:bg-slate-100 focus:outline-none">
+                    <i id="menu-icon" class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Menu Déroulant Mobile -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-2 shadow-lg">
+            <a href="index.html" data-i18n="nav.home" class="mobile-link block px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-lg">Accueil</a>
+            <a href="about.html" data-i18n="nav.about" class="mobile-link block px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-lg">Qui sommes-nous</a>
+            <a href="objectives.html" data-i18n="nav.objectives" class="mobile-link block px-4 py-2 text-sm font-semibold text-chaccopBlue bg-blue-50 rounded-lg">Objectifs</a>
+            <a href="activities.html" data-i18n="nav.activities" class="mobile-link block px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-lg">Nos Activités</a>
+            <a href="services.html" data-i18n="nav.services" class="mobile-link block px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-lg">Nos Services</a>
+            <a href="partners.html" data-i18n="nav.partners" class="mobile-link block px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-lg">Partenaires</a>
+
+            <!-- Sélecteur de Langue Mobile -->
+            <div class="pt-3 border-t border-slate-100 px-4">
+                <span data-i18n="lang.title" class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-2">Langue / Language</span>
+                <div class="grid grid-cols-3 gap-2">
+                    <button onclick="changeLanguage('Français', 'fr')" class="py-2 text-center text-xs font-bold bg-slate-100 hover:bg-blue-50 hover:text-chaccopBlue rounded-lg border border-slate-200">FR</button>
+                    <button onclick="changeLanguage('English', 'en')" class="py-2 text-center text-xs font-bold bg-slate-100 hover:bg-blue-50 hover:text-chaccopBlue rounded-lg border border-slate-200">EN</button>
+                    <button onclick="changeLanguage('Português', 'pt')" class="py-2 text-center text-xs font-bold bg-slate-100 hover:bg-blue-50 hover:text-chaccopBlue rounded-lg border border-slate-200">PT</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow">
+        <!-- Banner En-tête -->
+        <section class="bg-slate-900 text-white py-16 relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-r from-blue-950 via-slate-900 to-slate-900 opacity-90"></div>
+            <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+                <span class="text-xs font-bold uppercase tracking-widest text-amber-400 bg-amber-400/10 border border-amber-400/20 px-3 py-1 rounded-full" data-i18n="obj.page_badge">
+                    Feuille de Route Institutionnelle
+                </span>
+                <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight" data-i18n="obj.page_title">
+                    Nos Objectifs Stratégiques
+                </h1>
+                <p class="text-slate-300 max-w-2xl mx-auto text-base sm:text-lg" data-i18n="obj.page_subtitle">
+                    Accompagner, structurer et accélérer la coopération économique et industrielle entre la RDC et le Portugal.
+                </p>
+            </div>
+        </section>
+
+        <section id="objectifs" class="py-16 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Grille des 7 Objectifs -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <!-- Objectif 1 -->
+            <div class="bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-chart-line text-lg"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3" data-i18n="obj.p1_title">1. Promotion des Échanges Commercial & Industriel</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6" data-i18n="obj.p1_desc">
+                        Promouvoir les échanges commerciaux, industriels et culturels entre la République Démocratique du Congo et la République du Portugal.
+                    </p>
+                </div>
+                <ul class="space-y-2 text-xs font-medium text-slate-700">
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-chaccopGreen"></i> <span data-i18n="obj.p1_k1">Mise en relation d'affaires directe (B2B)</span></li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-chaccopGreen"></i> <span data-i18n="obj.p1_k2">Valorisation du savoir-faire congolais et portugais</span></li>
+                </ul>
+            </div>
+
+            <!-- Objectif 2 (Uniformisé : bg-slate-100/60 et border-slate-200/80) -->
+            <div class="bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-handshake text-lg"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3" data-i18n="obj.p2_title">2. Partenariats d'Affaires & Entreprises</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6" data-i18n="obj.p2_desc">
+                        Faciliter les partenariats stratégiques, les co-entreprises et les réseaux de collaboration directe entre les entreprises des deux pays.
+                    </p>
+                </div>
+                <ul class="space-y-2 text-xs font-medium text-slate-700">
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-chaccopGreen"></i> <span data-i18n="obj.p2_k1">Réseautage et maillage d'entreprises</span></li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-chaccopGreen"></i> <span data-i18n="obj.p2_k2">Accompagnement à l'implantation binationale</span></li>
+                </ul>
+            </div>
+
+            <!-- Objectif 3 -->
+            <div class="bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-comments text-lg"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3" data-i18n="obj.p3_title">3. Conseil, Accompagnement & Médiation</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6" data-i18n="obj.p3_desc">
+                        Offrir des services spécialisés de conseil, d'accompagnement sur-mesure et de médiation commerciale pour sécuriser les transactions.
+                    </p>
+                </div>
+                <ul class="space-y-2 text-xs font-medium text-slate-700">
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-chaccopGreen"></i> <span data-i18n="obj.p3_k1">Médiation et conciliation commerciale</span></li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-chaccopGreen"></i> <span data-i18n="obj.p3_k2">Conseil juridique, fiscal et réglementaire</span></li>
+                </ul>
+            </div>
+
+            <!-- Objectif 4 -->
+            <div class="bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-piggy-bank text-lg"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3" data-i18n="obj.p4_title">4. Attraction et Sécurisation des IDE</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6" data-i18n="obj.p4_desc">
+                        Promouvoir les Investissements Directs Étrangers en RDC en offrant un cadre de confiance et un suivi dans les secteurs prioritaires.
+                    </p>
+                </div>
+                <ul class="space-y-2 text-xs font-medium text-slate-700">
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-chaccopGreen"></i> <span data-i18n="obj.p4_k1">Orientation dans les secteurs prioritaires (Énergie, Mines, BTP)</span></li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-chaccopGreen"></i> <span data-i18n="obj.p4_k2">Sécurisation juridique et partenariats public-privé</span></li>
+                </ul>
+            </div>
+
+            <!-- Objectif 5 -->
+            <div class="bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-lightbulb text-lg"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3" data-i18n="obj.p5_title">5. Plateforme sur le Climat des Affaires</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6" data-i18n="obj.p5_desc">
+                        Mettre en place une plateforme d'échange d'informations fiables sur l'évolution du climat des affaires et des opportunités marchandes.
+                    </p>
+                </div>
+                <ul class="space-y-2 text-xs font-medium text-slate-700">
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-chaccopGreen"></i> <span data-i18n="obj.p5_k1">Analyses de marché et veille économique</span></li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-chaccopGreen"></i> <span data-i18n="obj.p5_k2">Guides pratiques douaniers et des affaires</span></li>
+                </ul>
+            </div>
+
+            <!-- Objectif 6 -->
+            <div class="bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 bg-rose-100 text-rose-600 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-users text-lg"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3" data-i18n="obj.p6_title">6. Organisation de Missions & Événements</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6" data-i18n="obj.p6_desc">
+                        Concevoir et orchestrer des délégations économiques, des foires, forums d'affaires et séminaires à Kinshasa et Lisbonne.
+                    </p>
+                </div>
+                <ul class="space-y-2 text-xs font-medium text-slate-700">
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-chaccopGreen"></i> <span data-i18n="obj.p6_k1">Missions de prospection commerciale sur-mesure</span></li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-chaccopGreen"></i> <span data-i18n="obj.p6_k2">Forums économiques bilatéraux RDC-Portugal</span></li>
+                </ul>
+            </div>
+
+            <!-- Objectif 7 -->
+            <div class="bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between md:col-span-2">
+                <div>
+                    <div class="w-12 h-12 bg-teal-100 text-teal-600 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-building-columns text-lg"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3" data-i18n="obj.p7_title">7. Point Focal Institutionnel Bilatéral</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6" data-i18n="obj.p7_desc">
+                        Servir d'intermédiaire privilégié et de point focal entre les institutions congolaises et portugaises chargées de la promotion économique.
+                    </p>
+                </div>
+                <ul class="space-y-2 text-xs font-medium text-slate-700">
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-chaccopGreen"></i> <span data-i18n="obj.p7_k1">Liaison officielle avec les agences étatiques (ANAPI, FEC, AICEP)</span></li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-chaccopGreen"></i> <span data-i18n="obj.p7_k2">Facilitation administrative et diplomatique pour investisseurs</span></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</section>
+</main>
+
+    <!-- FOOTER -->
+    <footer id="contact" class="bg-slate-900 text-white border-t border-slate-800 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Col 1 : À Propos -->
+                <div class="space-y-4">
+                    <img src="chaccop_logo.png" alt="CHACCOP Logo" class="h-14 w-auto object-contain bg-white/10 p-2 rounded-lg">
+                    <p class="text-slate-400 text-xs leading-relaxed" data-i18n="footer.desc">
+                        Chambre de Commerce et d'Industrie RDC-Portugal (ASBL). L'organe de référence pour dynamiser les échanges économiques, industriels et commerciaux bilatéraux.
+                    </p>
+                    <div class="flex space-x-3 text-slate-400">
+                        <a href="#" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-chaccopBlue hover:text-white flex items-center justify-center transition-colors"><i class="fa-brands fa-linkedin-in text-sm"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-chaccopBlue hover:text-white flex items-center justify-center transition-colors"><i class="fa-brands fa-facebook-f text-sm"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-chaccopBlue hover:text-white flex items-center justify-center transition-colors"><i class="fa-brands fa-twitter text-sm"></i></a>
+                    </div>
+                </div>
+
+                <!-- Col 2 : Navigation Rapide -->
+                <div class="space-y-3">
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-amber-400" data-i18n="footer.links_title">Navigation</h3>
+                    <ul class="space-y-2 text-xs font-medium text-slate-300">
+                        <li><a href="index.html" data-i18n="nav.home" class="hover:text-amber-400 transition-colors">Accueil</a></li>
+                        <li><a href="about.html" data-i18n="nav.about" class="hover:text-amber-400 transition-colors">Qui sommes-nous</a></li>
+                        <li><a href="objectives.html" data-i18n="nav.objectives" class="hover:text-amber-400 transition-colors">Objectifs Stratégiques</a></li>
+                        <li><a href="activities.html" data-i18n="nav.activities" class="hover:text-amber-400 transition-colors">Nos Activités</a></li>
+                        <li><a href="services.html" data-i18n="nav.services" class="hover:text-amber-400 transition-colors">Nos Services</a></li>
+                        <li><a href="partners.html" data-i18n="nav.partners" class="hover:text-amber-400 transition-colors">Partenaires</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3 : Siège Kinshasa -->
+                <div class="space-y-3">
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-amber-400" data-i18n="footer.kinshasa_title">Siège Kinshasa (RDC)</h3>
+                    <ul class="space-y-2 text-xs text-slate-300">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-location-dot text-chaccopBlue mt-0.5"></i>
+                            <span>Centre Culturel Boboto, Avenue Père Boka, Gombe, Kinshasa</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-envelope text-chaccopBlue"></i>
+                            <span>contact@chaccop.org</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-phone text-chaccopBlue"></i>
+                            <span>+243 000 000 000</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Col 4 : Représentation Lisbonne -->
+                <div class="space-y-3">
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-amber-400" data-i18n="footer.lisbon_title">Permanence Lisbonne</h3>
+                    <ul class="space-y-2 text-xs text-slate-300">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-location-dot text-chaccopGreen mt-0.5"></i>
+                            <span>Lisbonne, Portugal</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-envelope text-chaccopGreen"></i>
+                            <span>lisboa@chaccop.org</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Baseline / Copyright -->
+            <div class="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+                <p>&copy; 2026 CHACCOP ASBL. Tous droits réservés.</p>
+                <p data-i18n="footer.legal">Association Sans But Lucratif régie par la Loi n°004/2001 (RDC)</p>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- JS & TRADUCTIONS -->
+    <script>
+       const translations = {
+    fr: {
+        "obj.p1_title": "1. Promotion des Échanges Commercial & Industriel",
+        "obj.p1_desc": "Promouvoir les échanges commerciaux, industriels et culturels entre la République Démocratique du Congo et la République du Portugal.",
+        "obj.p1_k1": "Mise en relation d'affaires directe (B2B)",
+        "obj.p1_k2": "Valorisation du savoir-faire congolais et portugais",
+
+        "obj.p2_title": "2. Partenariats d'Affaires & Entreprises",
+        "obj.p2_desc": "Faciliter les partenariats stratégiques, les co-entreprises et les réseaux de collaboration directe entre les entreprises des deux pays.",
+        "obj.p2_k1": "Réseautage et maillage d'entreprises",
+        "obj.p2_k2": "Accompagnement à l'implantation binationale",
+
+        "obj.p3_title": "3. Conseil, Accompagnement & Médiation",
+        "obj.p3_desc": "Offrir des services spécialisés de conseil, d'accompagnement sur-mesure et de médiation commerciale pour sécuriser les transactions.",
+        "obj.p3_k1": "Médiation et conciliation commerciale",
+        "obj.p3_k2": "Conseil juridique, fiscal et réglementaire",
+
+        "obj.p4_title": "4. Attraction et Sécurisation des IDE",
+        "obj.p4_desc": "Promouvoir les Investissements Directs Étrangers en RDC en offrant un cadre de confiance et un suivi dans les secteurs prioritaires.",
+        "obj.p4_k1": "Orientation dans les secteurs prioritaires (Énergie, Mines, BTP)",
+        "obj.p4_k2": "Sécurisation juridique et partenariats public-privé",
+
+        "obj.p5_title": "5. Plateforme sur le Climat des Affaires",
+        "obj.p5_desc": "Mettre en place une plateforme d'échange d'informations fiables sur l'évolution du climat des affaires et des opportunités marchandes.",
+        "obj.p5_k1": "Analyses de marché et veille économique",
+        "obj.p5_k2": "Guides pratiques douaniers et des affaires",
+
+        "obj.p6_title": "6. Organisation de Missions & Événements",
+        "obj.p6_desc": "Concevoir et orchestrer des délégations économiques, des foires, forums d'affaires et séminaires à Kinshasa et Lisbonne.",
+        "obj.p6_k1": "Missions de prospection commerciale sur-mesure",
+        "obj.p6_k2": "Forums économiques bilatéraux RDC-Portugal",
+
+        "obj.p7_title": "7. Point Focal Institutionnel Bilatéral",
+        "obj.p7_desc": "Servir d'intermédiaire privilégié et de point focal entre les institutions congolaises et portugaises chargées de la promotion économique.",
+        "obj.p7_k1": "Liaison officielle avec les agences étatiques (ANAPI, FEC, AICEP)",
+        "obj.p7_k2": "Facilitation administrative et diplomatique pour investisseurs"
+    },
+    en: {
+        "obj.p1_title": "1. Promotion of Commercial & Industrial Exchanges",
+        "obj.p1_desc": "Promote commercial, industrial, and cultural exchanges between the Democratic Republic of Congo and Portugal.",
+        "obj.p1_k1": "Direct B2B matchmaking",
+        "obj.p1_k2": "Promotion of Congolese and Portuguese expertise",
+
+        "obj.p2_title": "2. Business & Enterprise Partnerships",
+        "obj.p2_desc": "Facilitate strategic partnerships, joint ventures, and direct collaboration networks between companies in both countries.",
+        "obj.p2_k1": "Business networking and matchmaking",
+        "obj.p2_k2": "Support for bi-national establishment",
+
+        "obj.p3_title": "3. Consulting, Support & Mediation",
+        "obj.p3_desc": "Provide specialized consulting, tailored support, and commercial mediation services to secure transactions.",
+        "obj.p3_k1": "Commercial mediation and conciliation",
+        "obj.p3_k2": "Legal, tax, and regulatory advisory",
+
+        "obj.p4_title": "4. FDI Attraction and Securitization",
+        "obj.p4_desc": "Encourage Foreign Direct Investments in the DRC by offering a trusted framework and guidance in priority sectors.",
+        "obj.p4_k1": "Guidance in key sectors (Energy, Mining, Construction)",
+        "obj.p4_k2": "Legal security and public-private partnerships",
+
+        "obj.p5_title": "5. Business Climate Information Platform",
+        "obj.p5_desc": "Establish a reliable information exchange platform on the evolution of the business climate and market opportunities.",
+        "obj.p5_k1": "Market analysis and economic intelligence",
+        "obj.p5_k2": "Customs and legal business guides",
+
+        "obj.p6_title": "6. Organization of Missions & Events",
+        "obj.p6_desc": "Design and orchestrate trade delegations, fairs, bilateral business forums, and workshops in Kinshasa and Lisbon.",
+        "obj.p6_k1": "Tailored commercial prospecting missions",
+        "obj.p6_k2": "DRC-Portugal bilateral economic forums",
+
+        "obj.p7_title": "7. Institutional Bilateral Focal Point",
+        "obj.p7_desc": "Serve as a key focal point between Congolese and Portuguese institutions responsible for economic promotion.",
+        "obj.p7_k1": "Official liaison with state agencies (ANAPI, FEC, AICEP)",
+        "obj.p7_k2": "Administrative and diplomatic facilitation for investors"
+    },
+    pt: {
+        "obj.p1_title": "1. Promoção de Intercâmbios Comerciais e Industriais",
+        "obj.p1_desc": "Promover intercâmbios comerciais, industriais e culturais entre a República Democrática do Congo e Portugal.",
+        "obj.p1_k1": "Correspondência direta de negócios (B2B)",
+        "obj.p1_k2": "Valorização do conhecimento congolês e português",
+
+        "obj.p2_title": "2. Parcerias Empresariais e de Negócios",
+        "obj.p2_desc": "Facilitar parcerias estratégicas, joint ventures e redes de colaboração direta entre empresas de ambos os países.",
+        "obj.p2_k1": "Networking e ligação empresarial",
+        "obj.p2_k2": "Apoio à instalação binacional",
+
+        "obj.p3_title": "3. Consultoria, Acompanhamento e Mediação",
+        "obj.p3_desc": "Oferecer serviços especializados de consultoria, acompanhamento personalizado e mediação comercial para proteger negócios.",
+        "obj.p3_k1": "Mediação e conciliação comercial",
+        "obj.p3_k2": "Aconselhamento jurídico, fiscal e regulamentar",
+
+        "obj.p4_title": "4. Atração e Securitição do IDE",
+        "obj.p4_desc": "Incentivar Investimentos Diretos Estrangeiros na RDC, oferecendo um quadro de confiança e acompanhamento nos setores prioritários.",
+        "obj.p4_k1": "Orientação em setores prioritários (Energia, Minas, BTP)",
+        "obj.p4_k2": "Segurança jurídica e parcerias público-privadas",
+
+        "obj.p5_title": "5. Plataforma sobre o Clima de Negócios",
+        "obj.p5_desc": "Criar uma plataforma de troca de informações fiáveis sobre a evolução do clima de negócios e oportunidades de mercado.",
+        "obj.p5_k1": "Análises de mercado e inteligência económica",
+        "obj.p5_k2": "Guias práticos aduaneiros e de negócios",
+
+        "obj.p6_title": "6. Organização de Missões e Eventos",
+        "obj.p6_desc": "Conceber e organizar delegações económicas, feiras, fóruns de negócios e seminários em Kinshasa e Lisboa.",
+        "obj.p6_k1": "Missões de prospeção comercial personalizadas",
+        "obj.p6_k2": "Fóruns económicos bilaterais RDC-Portugal",
+
+        "obj.p7_title": "7. Ponto Focal Institucional Bilateral",
+        "obj.p7_desc": "Servir de ponto focal privilegiado entre as instituições congolesas e portuguesas responsáveis pela promoção económica.",
+        "obj.p7_k1": "Ligação oficial com agências estatais (ANAPI, FEC, AICEP)",
+        "obj.p7_k2": "Facilitação administrativa e diplomática para investidores"
+    }
+};
+            
+        function changeLanguage(label, code) {
+            if (!translations[code]) return;
+            document.querySelectorAll('[data-i18n]').forEach((element) => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[code][key]) {
+                    element.textContent = translations[code][key];
+                }
+            });
+            const currentLangLabel = document.getElementById('current-lang-desktop');
+            if (currentLangLabel) currentLangLabel.textContent = label;
+            localStorage.setItem('chaccop_lang_code', code);
+            localStorage.setItem('chaccop_lang_label', label);
+            const dropdown = document.getElementById('lang-dropdown-desktop');
+            if (dropdown) dropdown.classList.add('hidden');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileBtn && mobileMenu) {
+                mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+            }
+
+            const langBtnDesktop = document.getElementById('lang-btn-desktop');
+            const langDropdownDesktop = document.getElementById('lang-dropdown-desktop');
+            if (langBtnDesktop && langDropdownDesktop) {
+                langBtnDesktop.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    langDropdownDesktop.classList.toggle('hidden');
+                });
+                document.addEventListener('click', () => langDropdownDesktop.classList.add('hidden'));
+            }
+
+            const savedCode = localStorage.getItem('chaccop_lang_code') || 'fr';
+            const savedLabel = localStorage.getItem('chaccop_lang_label') || 'Français';
+            changeLanguage(savedLabel, savedCode);
+        });
+    </script>
+</body>
+</html>

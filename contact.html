@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHACCOP - Chambre de Commerce et de l'Industrie RDC-Portugal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        chaccopBlue: '#0052B4',
+                        chaccopRed: '#D92D20',
+                        chaccopYellow: '#FFC72C',
+                        chaccopGreen: '#009739',
+                        chaccopDark: '#1E293B',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-chaccopBlue selection:text-white">
+
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100 pt-6 pb-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center space-x-3">
+            <img src="chaccop_logo.png" alt="CHACCOP Logo" class="h-24 w-28 rounded">
+        </a>
+
+        <!-- Liens Desktop (Masqués sur Mobile) -->
+        <nav class="hidden md:flex items-center space-x-2">
+            <a href="index.html" class="px-3 py-2 text-sm font-semibold text-slate-700 hover:text-blue-600 rounded-lg">Accueil</a>
+            <a href="about.html" class="px-3 py-2 text-sm font-semibold text-slate-700 hover:text-blue-600 rounded-lg">Who we are</a>
+            <a href="objectifs.html" class="px-3 py-2 text-sm font-semibold text-slate-700 hover:text-blue-600 rounded-lg">Objectifs</a>
+            <a href="activites.html" class="px-3 py-2 text-sm font-semibold text-slate-700 hover:text-blue-600 rounded-lg">Nos Activités</a>
+            <a href="services.html" class="px-3 py-2 text-sm font-semibold text-slate-700 hover:text-blue-600 rounded-lg">Nos Services</a>
+            <a href="partenaires.html" class="px-3 py-2 text-sm font-semibold text-slate-700 hover:text-blue-600 rounded-lg">Partenaires</a>
+        </nav>
+
+        <!-- Actions & Bouton Hamburger Mobile -->
+        <div class="flex items-center space-x-3">
+            <a href="#contact" class="px-4 py-2 text-xs sm:text-sm font-bold text-white bg-[#0052B4] rounded-lg shadow-sm">
+                Contact us
+            </a>
+
+            <!-- Bouton Hamburger (Visible UNIQUEMENT sur Mobile) -->
+            <button id="mobile-menu-btn" class="md:hidden p-2 text-slate-700 rounded-lg hover:bg-slate-100 focus:outline-none">
+                <i id="menu-icon" class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Menu Déroulant Mobile (Masqué par défaut) -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-2 shadow-lg">
+        <a href="index.html" class="mobile-link block px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-lg">Accueil</a>
+        <a href="#about" class="mobile-link block px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-lg">Who we are</a>
+        <a href="#objectifs" class="mobile-link block px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-lg">Objectifs</a>
+        <a href="#activites" class="mobile-link block px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-lg">Nos Activités</a>
+        <a href="#services" class="mobile-link block px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-lg">Nos Services</a>
+        <a href="#partenaires" class="mobile-link block px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-lg">Partenaires</a>
+    </div>
+</header>
+
+<!-- Script JS pour activer le Toggle -->
+<script>
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    const icon = document.getElementById('menu-icon');
+    const links = document.querySelectorAll('.mobile-link');
+
+    // Toggle menu au clic du burger
+    btn.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+        if (menu.classList.contains('hidden')) {
+            icon.classList.remove('fa-xmark');
+            icon.classList.add('fa-bars');
+        } else {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-xmark');
+        }
+    });
+
+    // Fermer le menu automatiquement quand l'utilisateur clique sur un lien
+    links.forEach(link => {
+        link.addEventListener('click', () => {
+            menu.classList.add('hidden');
+            icon.classList.remove('fa-xmark');
+            icon.classList.add('fa-bars');
+        });
+    });
+</script>
+
+
+<!-- SECTION CONTACT US (Reprend la mise en page de la maquette) -->
+    <section id="contact" class="py-20 bg-slate-50">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-black tracking-widest text-chaccopBlue uppercase mb-2">Localisation & Info</h2>
+                <p class="text-3xl font-extrabold text-slate-900 sm:text-4xl">Contact us</p>
+                <div class="w-16 h-1 bg-chaccopBlue mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="space-y-6">
+                <!-- Kinshasa Address Card (Border Blue) -->
+                <div class="p-6 sm:p-8 border-2 border-chaccopBlue rounded-2xl bg-white shadow-sm flex items-start space-x-5">
+                    <div class="w-12 h-12 bg-blue-100 text-chaccopBlue rounded-xl flex items-center justify-center text-xl shrink-0">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-900">Adresse à Kinshasa</h3>
+                        <p class="text-sm text-slate-600 mt-1">CHACCOP – Représentation RDC</p>
+                        <p class="text-xs text-slate-400 italic mt-0.5">Kinshasa, République Démocratique du Congo (En synergie avec la FEC & ANAPI)</p>
+                    </div>
+                </div>
+
+                <!-- Lisbonne Address Card (Border Red) -->
+                <div class="p-6 sm:p-8 border-2 border-chaccopRed rounded-2xl bg-white shadow-sm flex items-start space-x-5">
+                    <div class="w-12 h-12 bg-red-100 text-chaccopRed rounded-xl flex items-center justify-center text-xl shrink-0">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-900">Adresse à Lisbonne</h3>
+                        <p class="text-sm text-slate-600 mt-1">CHACCOP – Représentation Portugal</p>
+                        <p class="text-xs text-slate-400 italic mt-0.5">Lisbonne, Portugal (En synergie avec AICEP Portugal Global)</p>
+                    </div>
+                </div>
+
+                <!-- Contact Information Card -->
+                <div class="p-6 sm:p-8 border-2 border-slate-300 rounded-2xl bg-white shadow-sm flex items-start space-x-5">
+                    <div class="w-12 h-12 bg-amber-100 text-amber-700 rounded-xl flex items-center justify-center text-xl shrink-0">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-900">Contact information</h3>
+                        <p class="text-sm text-slate-600 mt-1">Email : contact@chaccop.org &bull; Secrétariat Général</p>
+                        <p class="text-xs text-slate-400 italic mt-0.5">Formulaire et numéros officiels à compléter lors du lancement officiel.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER (Dégradé Vert/Bleu comme sur la Maquette) -->
+    <footer class="bg-gradient-to-r from-teal-600 via-emerald-600 to-green-600 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+            <div class="font-extrabold text-2xl tracking-tight">
+                CHACCOP
+            </div>
+            <p class="text-sm text-teal-100 max-w-md mx-auto">
+                Chambre de Commerce et de l’Industrie RDC–Portugal
+            </p>
+            <div>
+                <a href="#contact" class="inline-block px-8 py-3 bg-white text-emerald-800 font-bold rounded-xl shadow hover:bg-slate-100 transition-colors">
+                    Contact us
+                </a>
+            </div>
+            <div class="text-xs text-teal-200/80 pt-6 border-t border-white/10">
+                &copy; 2026 CHACCOP. Tous droits réservés.
+            </div>
+        </div>
+    </footer>
